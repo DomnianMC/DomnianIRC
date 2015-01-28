@@ -1,0 +1,11 @@
+name: GalaxyIRC
+main: net.galaxygaming.GalaxyIRC.GalaxyIRC
+author: willies952002
+version: DEV
+
+commands:
+  irc:
+    usage: /irc [join|list] [channel]
+    description: Command for Controlling the IRC Bot
+    permission: galaxyirc.irc
+    permission-message: You are not allowed to control the IRC Bot

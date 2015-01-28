@@ -12,6 +12,7 @@ public class GalaxyIRC extends JavaPlugin {
 	IRCBridge irc = new IRCBridge();
 
 	public void onEnable() {
+		this.saveDefaultConfig();
 		try {
 			sql = new SQLHandler(this.getConfig().getString("db.host"), this
 					.getConfig().getString("db.name"), this.getConfig()
@@ -22,8 +23,13 @@ public class GalaxyIRC extends JavaPlugin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.getServer().getPluginManager().registerEvents(new ChatListener(), this);
-		
+		this.getServer().getPluginManager().registerEvents(new ChatListener(irc), this);
+		this.getCommand("irc").setExecutor(new IRCExe(this));
+	}
+
+	public void onDisable() {
+		irc.conn.doQuit("GalaxyIRC Disabled");
+		irc.conn.close();
 	}
 
 }

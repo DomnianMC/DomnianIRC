@@ -10,11 +10,14 @@ import com.willies952002.WSCore.SQLHandler;
 
 public class IRCBridge {
 
-	static SQLHandler sql;
-	static LogHandler log;
+	GalaxyIRC main;
+	SQLHandler sql;
+	LogHandler log;
 	IRCConnection conn;
+	public String channel;
 
 	public void init(GalaxyIRC main) throws IOException {
+		this.main = main;
 		sql = main.sql;
 		log = main.log;
 		if (main.getConfig().getBoolean("irc.ssl")) {
@@ -35,11 +38,22 @@ public class IRCBridge {
 							"irc.name.real"));
 		}
 		conn.connect();
-		conn.addIRCEventListener(new IRCChatListener());
+		if ( main.getConfig().getBoolean("irc.auto.join") ) {
+			System.out.println("AUTO JOIN ENABLED");
+			String channel = main.getConfig().getString("irc.auto.channel");
+			conn.doJoin(channel);
+			System.out.println("SENDING BOT TO " + channel);
+		}
+		conn.addIRCEventListener(new IRCChatListener(main));
 	}
 	
-	public void sendMessage(String name, String message) {
-		conn.send("[Minecraft] " + name + ": " + message);
+	public void msgServerToIRC(String name, String message) {
+		conn.doPrivmsg(channel, "[Minecraft] " + name + ": " + message);
+	}
+
+	public void msgIRCToServer(String msg) {
+		String prefix = main.getConfig().getString("irc.prefix").replace('&', '§');
+		main.getServer().broadcastMessage(prefix + msg);
 	}
 
 }

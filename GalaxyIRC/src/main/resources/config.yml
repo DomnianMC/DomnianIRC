@@ -1,0 +1,27 @@
+#####################
+# SQL Configuration #
+#####################
+db:
+  host: 'localhost'
+  name: 'table'
+  user: 'user'
+  pass: 'pass'
+  
+#####################
+# IRC Configuration #
+#####################
+irc:
+  ssl: false
+  host: 'irc.example.com'
+  port:
+    min: 6666
+    max: 6667
+  pass: 'pass'
+  name:
+    nick: 'nick'
+    user: 'user'
+    real: 'real'
+  prefix: '&4IRC &8&l>> &r'
+  auto:
+    join: true
+    channel: '#IRCControl'
