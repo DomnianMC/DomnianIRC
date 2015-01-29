@@ -25,42 +25,19 @@ public class GalaxyIRC extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		try {
-			if (this.doDMCACheck()) {
-				this.saveDefaultConfig();
-				sql = new SQLHandler(this.getConfig().getString("db.host"),
-						this.getConfig().getString("db.name"), this.getConfig()
-								.getString("db.user"), this.getConfig()
-								.getString("db.pass"));
-				log = new LogHandler(this.getDataFolder().getAbsolutePath());
-				irc.init(this);
-				this.getServer().getPluginManager()
-						.registerEvents(new ChatListener(irc), this);
-				this.getServer().getPluginManager().registerEvents(this, this);
-				this.getCommand("irc").setExecutor(new IRCExe(this));
-			} else {
-				System.out
-						.println("You Must Accept The DMCA Agreement Before This Plugin Will Function.");
-				this.getServer().getPluginManager().disablePlugin(this);
-			}
+			this.saveDefaultConfig();
+			sql = new SQLHandler(this.getConfig().getString("db.host"),
+					this.getConfig().getString("db.name"), this.getConfig()
+							.getString("db.user"), this.getConfig()
+							.getString("db.pass"));
+			log = new LogHandler(this.getDataFolder().getAbsolutePath());
+			irc.init(this);
+			this.getServer().getPluginManager()
+					.registerEvents(new ChatListener(irc), this);
+			this.getServer().getPluginManager().registerEvents(this, this);
+			this.getCommand("irc").setExecutor(new IRCExe(this));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	private boolean doDMCACheck() throws Exception {
-		this.exportResource("dmca.txt");
-		File file = new File(this.getDataFolder() + File.separator + "dmca.txt");
-		if ( file.createNewFile() ) {
-			this.exportResource("dmca.txt");
-			return false;
-		} else {
-			Properties dmca = new Properties();
-			dmca.load(new FileReader(file.getAbsolutePath()));
-			if ( Boolean.getBoolean(dmca.getProperty("dmca")) ) {
-				return true;
-			} else {
-				return false;
-			}
 		}
 	}
 
