@@ -73,16 +73,15 @@ public class IRCExe implements CommandExecutor {
 
 	private void invalid(CommandSender sender) {
 		sender.sendMessage(ChatColor.RED + "Incorrect Usage: /irc [join|list|quit|connect] [channel]");
-		
 	}
 
 	private void usage(CommandSender sender) {
-		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.AQUA + "Galaxy" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]-=-=-=-=-=-=-=-=-=-");
+		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.AQUA + "Galaxy" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]===================");
 		sender.sendMessage(ChatColor.GREEN + " join " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to tell the bot to join a channel");
 		sender.sendMessage(ChatColor.GREEN + " list " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to list the server's channels");
 		sender.sendMessage(ChatColor.GREEN + " connect " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to (re)connect to the IRC server");
 		sender.sendMessage(ChatColor.GREEN + " quit " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to close the connection to the IRC server");
-		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.AQUA + "Galaxy" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]-=-=-=-=-=-=-=-=-=-");
+		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.AQUA + "Galaxy" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]===================");
 	}
 
 }

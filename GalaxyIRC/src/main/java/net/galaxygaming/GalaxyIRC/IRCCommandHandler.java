@@ -12,17 +12,17 @@ public class IRCCommandHandler {
 		if ( cmd.startsWith(".mute") ) {
 			cmd.replaceFirst(".", "/");
 			Bukkit.getServer().broadcastMessage(cmd + " (mute)");
-			Bukkit.getServer().dispatchCommand(new IRCCommandSender(), cmd);
+			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), cmd);
 			logCommand(main, user.getNick(), cmd);
 		} else if ( cmd.startsWith(".kick") ) {
 			cmd.replaceFirst(".", "/");
 			Bukkit.getServer().broadcastMessage(cmd + " (kick)");
-			Bukkit.getServer().dispatchCommand(new IRCCommandSender(), cmd);
+			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), cmd);
 			logCommand(main, user.getNick(), cmd);
 		} else if ( cmd.startsWith(".ban") ) {
 			cmd.replaceFirst(".", "/");
 			Bukkit.getServer().broadcastMessage(cmd + " (ban)");
-			Bukkit.getServer().dispatchCommand(new IRCCommandSender(), cmd);
+			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), cmd);
 			logCommand(main, user.getNick(), cmd);
 		} else if ( cmd.startsWith(".ignore") ) {
 			cmd.replaceFirst(".", "/");

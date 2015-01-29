@@ -11,8 +11,8 @@ public class ChatListener implements Listener {
 
 	IRCBridge irc;
 	
-	public ChatListener(IRCBridge bridge) {
-		this.irc = bridge; 
+	public ChatListener(IRCBridge irc) {
+		this.irc = irc; 
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
