@@ -1,11 +1,4 @@
-package net.galaxygaming.GalaxyIRC;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Properties;
+package com.domnian.DomnianIRC;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -17,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.willies952002.WSCore.LogHandler;
 import com.willies952002.WSCore.SQLHandler;
 
-public class GalaxyIRC extends JavaPlugin implements Listener {
+public class DomnianIRC extends JavaPlugin implements Listener {
 
 	LogHandler log;
 	SQLHandler sql;
@@ -52,34 +45,7 @@ public class GalaxyIRC extends JavaPlugin implements Listener {
 				.getScheduler()
 				.scheduleSyncDelayedTask(this,
 						new LoginMessage(ple.getPlayer()), 20L);
-	}
-
-	public String exportResource(String resourceName) throws Exception {
-		InputStream stream = null;
-		OutputStream resStreamOut = null;
-		String jarFolder;
-		try {
-			stream = GalaxyIRC.class.getResourceAsStream(resourceName);
-			if (stream == null) {
-				throw new Exception("Cannot get resource \"" + resourceName
-						+ "\" from Jar file.");
-			}
-			int readBytes;
-			byte[] buffer = new byte[4096];
-			jarFolder = new File(GalaxyIRC.class.getProtectionDomain()
-					.getCodeSource().getLocation().toURI().getPath())
-					.getParentFile().getPath().replace('\\', '/');
-			resStreamOut = new FileOutputStream(jarFolder + resourceName);
-			while ((readBytes = stream.read(buffer)) > 0) {
-				resStreamOut.write(buffer, 0, readBytes);
-			}
-		} catch (Exception ex) {
-			throw ex;
-		} finally {
-			stream.close();
-			resStreamOut.close();
-		}
-		return jarFolder + resourceName;
+		irc.conn.doPrivmsg(irc.channel, ple.getPlayer().getName() + "Joined The Game");
 	}
 
 }

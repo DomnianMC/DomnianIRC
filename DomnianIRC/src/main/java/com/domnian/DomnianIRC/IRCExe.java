@@ -1,4 +1,4 @@
-package net.galaxygaming.GalaxyIRC;
+package com.domnian.DomnianIRC;
 
 import java.io.IOException;
 
@@ -10,9 +10,9 @@ import org.bukkit.command.CommandSender;
 public class IRCExe implements CommandExecutor {
 
 	IRCBridge irc;
-	GalaxyIRC main;
+	DomnianIRC main;
 	
-	public IRCExe(GalaxyIRC main) {
+	public IRCExe(DomnianIRC main) {
 		this.main = main;
 		this.irc = main.irc;
 	}
@@ -76,12 +76,12 @@ public class IRCExe implements CommandExecutor {
 	}
 
 	private void usage(CommandSender sender) {
-		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.AQUA + "Galaxy" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]===================");
+		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.GREEN + "Domnian" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]===================");
 		sender.sendMessage(ChatColor.GREEN + " join " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to tell the bot to join a channel");
 		sender.sendMessage(ChatColor.GREEN + " list " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to list the server's channels");
 		sender.sendMessage(ChatColor.GREEN + " connect " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to (re)connect to the IRC server");
 		sender.sendMessage(ChatColor.GREEN + " quit " + ChatColor.GOLD + "-" + ChatColor.YELLOW + " used to close the connection to the IRC server");
-		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.AQUA + "Galaxy" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]===================");
+		sender.sendMessage(ChatColor.RED + "===================[ " + ChatColor.GREEN + "Domnian" + ChatColor.WHITE + "IRC" + ChatColor.RED + " ]===================");
 	}
 
 }

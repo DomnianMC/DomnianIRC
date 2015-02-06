@@ -1,4 +1,4 @@
-package net.galaxygaming.GalaxyIRC;
+package com.domnian.DomnianIRC;
 
 import org.bukkit.ChatColor;
 import org.schwering.irc.lib.IRCEventListener;
@@ -7,19 +7,19 @@ import org.schwering.irc.lib.IRCUser;
 
 public class IRCChatListener implements IRCEventListener {
 
-	GalaxyIRC main;
+	DomnianIRC main;
 
-	public IRCChatListener(GalaxyIRC main) {
+	public IRCChatListener(DomnianIRC main) {
 		this.main = main;
 	}	
 
 	@Override
 	public void onError(String msg) {
-		main.getServer().broadcastMessage("§4IRC ERROR >> " + msg);
+		System.out.println("§4IRC ERROR >> " + msg);
 	}
 
 	@Override public void onError(int num, String msg) {
-		main.getServer().broadcastMessage("§4IRC ERROR >> " + num + " : " + msg);
+		System.out.println("§4IRC ERROR >> " + num + " : " + msg);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class IRCChatListener implements IRCEventListener {
 		} else if ( msg.startsWith("PING") ) {
 			main.irc.conn.doPrivmsg(main.irc.channel, "PING not supported");
 		} else if ( msg.startsWith("VERSION") ) {
-			main.irc.conn.doPrivmsg(main.irc.channel, "VERSION Reply -> GalaxyIRC DEV : Java " + System.getProperty("java.version"));
+			main.irc.conn.doPrivmsg(main.irc.channel, "VERSION Reply -> DomnianIRC DEV : Java " + System.getProperty("java.version"));
 			return;
 		} else {
 			if ( !msg.contains(".") ) {
@@ -58,7 +58,7 @@ public class IRCChatListener implements IRCEventListener {
 
 	@Override
 	public void onReply(int num, String value, String msg) {
-		main.getServer().broadcastMessage("IRC REPLY >> " + num + " : " + value + " : " + msg);
+		System.out.println("IRC REPLY >> " + num + " : " + value + " : " + msg);
 	}
 	
 	@Override public void onQuit(IRCUser user, String msg) {

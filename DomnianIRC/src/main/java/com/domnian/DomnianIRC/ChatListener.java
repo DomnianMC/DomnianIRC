@@ -1,4 +1,4 @@
-package net.galaxygaming.GalaxyIRC;
+package com.domnian.DomnianIRC;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

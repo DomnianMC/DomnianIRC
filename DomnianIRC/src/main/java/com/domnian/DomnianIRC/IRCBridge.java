@@ -1,4 +1,4 @@
-package net.galaxygaming.GalaxyIRC;
+package com.domnian.DomnianIRC;
 
 import java.io.IOException;
 
@@ -10,13 +10,13 @@ import com.willies952002.WSCore.SQLHandler;
 
 public class IRCBridge {
 
-	GalaxyIRC main;
+	DomnianIRC main;
 	SQLHandler sql;
 	LogHandler log;
 	IRCConnection conn;
 	public String channel;
 
-	public void init(GalaxyIRC main) throws IOException {
+	public void init(DomnianIRC main) throws IOException {
 		this.main = main;
 		sql = main.sql;
 		log = main.log;

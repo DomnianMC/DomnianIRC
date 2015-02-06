@@ -1,4 +1,4 @@
-package net.galaxygaming.GalaxyIRC;
+package com.domnian.DomnianIRC;
 
 import java.sql.SQLException;
 
@@ -7,7 +7,7 @@ import org.schwering.irc.lib.IRCUser;
 
 public class IRCCommandHandler {
 
-	public static void execute(GalaxyIRC main, IRCUser user, String cmd) throws Exception {
+	public static void execute(DomnianIRC main, IRCUser user, String cmd) throws Exception {
 		//TODO Map Commands
 		if ( cmd.startsWith(".mute") ) {
 			cmd.replaceFirst(".", "/");
@@ -34,7 +34,7 @@ public class IRCCommandHandler {
 		}
 	}
 	
-	private static void logCommand(GalaxyIRC main, String nick, String cmd) throws SQLException {
+	private static void logCommand(DomnianIRC main, String nick, String cmd) throws SQLException {
 		main.sql.getStatement().execute("INSERT INTO `GalaxyBot`.`CommandLog` (`nick`, `command`, `timestamp`) VALUES ('" + nick + "', '" + cmd + "', CURRENT_TIMESTAMP);");
 	}
 

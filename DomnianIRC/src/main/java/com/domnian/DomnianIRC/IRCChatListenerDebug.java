@@ -1,4 +1,4 @@
-package net.galaxygaming.GalaxyIRC;
+package com.domnian.DomnianIRC;
 
 import org.schwering.irc.lib.IRCEventListener;
 import org.schwering.irc.lib.IRCModeParser;
@@ -6,9 +6,9 @@ import org.schwering.irc.lib.IRCUser;
 
 public class IRCChatListenerDebug implements IRCEventListener {
 
-	GalaxyIRC main;
+	DomnianIRC main;
 
-	public IRCChatListenerDebug(GalaxyIRC main) {
+	public IRCChatListenerDebug(DomnianIRC main) {
 		this.main = main;
 	}
 
