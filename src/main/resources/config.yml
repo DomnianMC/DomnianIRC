@@ -1,13 +1,4 @@
 #####################
-# SQL Configuration #
-#####################
-db:
-  host: 'localhost'
-  name: 'table'
-  user: 'user'
-  pass: 'pass'
-  
-#####################
 # IRC Configuration #
 #####################
 irc:
@@ -24,4 +15,4 @@ irc:
   prefix: '&4IRC &8&l>> &r'
   auto:
     join: true
-    channel: '#IRCControl'
+    channel: '#Lobby'

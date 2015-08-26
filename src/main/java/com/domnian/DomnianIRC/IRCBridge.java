@@ -2,24 +2,18 @@ package com.domnian.DomnianIRC;
 
 import java.io.IOException;
 
+import com.domnian.DomnianIRC.listeners.IRCChatListener;
+import com.domnian.api.Util;
 import org.schwering.irc.lib.IRCConnection;
 import org.schwering.irc.lib.ssl.SSLIRCConnection;
 
-import com.willies952002.WSCore.LogHandler;
-import com.willies952002.WSCore.SQLHandler;
-
 public class IRCBridge {
 
-	DomnianIRC main;
-	SQLHandler sql;
-	LogHandler log;
+	DomnianIRC main = DomnianIRC.getInstance();
 	IRCConnection conn;
 	public String channel;
 
-	public void init(DomnianIRC main) throws IOException {
-		this.main = main;
-		sql = main.sql;
-		log = main.log;
+	public void init() throws IOException {
 		if (main.getConfig().getBoolean("irc.ssl")) {
 			conn = new SSLIRCConnection(main.getConfig().getString("irc.host"),
 					main.getConfig().getInt("irc.port.min"), main.getConfig()
@@ -44,7 +38,7 @@ public class IRCBridge {
 			conn.doJoin(channel);
 			System.out.println("SENDING BOT TO " + channel);
 		}
-		conn.addIRCEventListener(new IRCChatListener(main));
+		conn.addIRCEventListener(new IRCChatListener());
 	}
 	
 	public void msgServerToIRC(String name, String message) {
@@ -52,7 +46,7 @@ public class IRCBridge {
 	}
 
 	public void msgIRCToServer(String msg) {
-		String prefix = main.getConfig().getString("irc.prefix").replace('&', '§');
+		String prefix = Util.color(main.getConfig().getString("irc.prefix"));
 		main.getServer().broadcastMessage(prefix + msg);
 	}
 

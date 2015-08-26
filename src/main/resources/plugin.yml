@@ -1,11 +1,11 @@
-name: GalaxyIRC
-main: net.galaxygaming.GalaxyIRC.GalaxyIRC
+name: DomnianIRC
+main: com.domnian.DomnianIRC.DomnianIRC
 author: willies952002
-version: DEV
+version: 0.5
 
 commands:
   irc:
-    usage: /irc [join|list] [channel]
+    usage: /irc [join|list|quit|connect] [channel]
     description: Command for Controlling the IRC Bot
-    permission: galaxyirc.irc
+    permission: domnian.irc
     permission-message: You are not allowed to control the IRC Bot

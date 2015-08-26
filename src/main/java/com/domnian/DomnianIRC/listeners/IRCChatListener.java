@@ -1,5 +1,7 @@
-package com.domnian.DomnianIRC;
+package com.domnian.DomnianIRC.listeners;
 
+import com.domnian.DomnianIRC.DomnianIRC;
+import com.domnian.DomnianIRC.IRCBridge;
 import org.bukkit.ChatColor;
 import org.schwering.irc.lib.IRCEventListener;
 import org.schwering.irc.lib.IRCModeParser;
@@ -7,11 +9,8 @@ import org.schwering.irc.lib.IRCUser;
 
 public class IRCChatListener implements IRCEventListener {
 
-	DomnianIRC main;
-
-	public IRCChatListener(DomnianIRC main) {
-		this.main = main;
-	}	
+	IRCBridge irc = DomnianIRC.getIRCBridge();
+	String channel = irc.channel;
 
 	@Override
 	public void onError(String msg) {
@@ -24,34 +23,35 @@ public class IRCChatListener implements IRCEventListener {
 
 	@Override
 	public void onJoin(String chan, IRCUser user) {
-		String prefix = main.getConfig().getString("irc.prefix").replace('&', '§');
-		main.getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Joined IRC");
+		String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix").replace('&', '§');
+		DomnianIRC.getInstance().getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Joined IRC");
 	}
 
 	@Override
 	public void onPart(String chan, IRCUser user, String msg) {
-		String prefix = main.getConfig().getString("irc.prefix").replace('&', '§');
-		main.getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Left IRC");
+		String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix").replace('&', '§');
+		DomnianIRC.getInstance().getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Left IRC");
 	}
 
 	@Override
 	public void onPrivmsg(String target, IRCUser user, String msg) {
 		if ( msg.startsWith(".") || msg.startsWith("!") ) {
 			try {
-				IRCCommandHandler.execute(main, user, msg);
+				//TODO Implement Commands
+				irc.conn.doPrivmsg(user.getNick(), "Commands Not Yet Implemented");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if ( msg.startsWith("ACTION") ) {
-			main.irc.conn.doPrivmsg(main.irc.channel, "ACTION not supported");
+			irc.conn.doPrivmsg(channel, "ACTION not supported");
 		} else if ( msg.startsWith("PING") ) {
-			main.irc.conn.doPrivmsg(main.irc.channel, "PING not supported");
+			irc.conn.doPrivmsg(channel, "PONG!!!");
 		} else if ( msg.startsWith("VERSION") ) {
-			main.irc.conn.doPrivmsg(main.irc.channel, "VERSION Reply -> DomnianIRC DEV : Java " + System.getProperty("java.version"));
+			irc.conn.doPrivmsg(channel, "VERSION Reply -> DomnianIRC 0.5 : Java " + System.getProperty("java.version"));
 			return;
 		} else {
-			if ( !msg.contains(".") ) {
-				main.irc.msgIRCToServer(user.getNick().replaceAll("[" + "A" + "]", "") + ": " + msg);
+			if ( !(msg.startsWith(".") || msg.startsWith("!")) ) {
+				irc.msgIRCToServer(user.getNick() + ": " + msg);
 			}
 		}
 	}
@@ -62,8 +62,8 @@ public class IRCChatListener implements IRCEventListener {
 	}
 	
 	@Override public void onQuit(IRCUser user, String msg) {
-		String prefix = main.getConfig().getString("irc.prefix").replace('&', '§');
-		main.getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Joined IRC");
+		String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix").replace('&', '§');
+		DomnianIRC.getInstance().getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Joined IRC");
 	}
 
 	@Override public void onTopic(String chan, IRCUser user, String topic) {}
