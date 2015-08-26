@@ -27,15 +27,6 @@
     </dependency>
   </dependencies>
 
-  <!-- Sonatype Nexus Server on Local Machine -->
-  <distributionManagement>
-    <repository>
-      <id>nexus</id>
-      <name>Nexus</name>
-      <url>http://192.168.1.142:8081/nexus/content/repositories/local/</url>
-    </repository>
-  </distributionManagement>
-
   <build>
     <plugins>
       <plugin>
