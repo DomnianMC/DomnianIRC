@@ -10,7 +10,7 @@ import org.schwering.irc.lib.ssl.SSLIRCConnection;
 public class IRCBridge {
 
 	DomnianIRC main = DomnianIRC.getInstance();
-	IRCConnection conn;
+	public IRCConnection conn;
 	public String channel;
 
 	public void init() throws IOException {

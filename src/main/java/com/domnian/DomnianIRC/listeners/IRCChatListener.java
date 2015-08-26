@@ -2,6 +2,7 @@ package com.domnian.DomnianIRC.listeners;
 
 import com.domnian.DomnianIRC.DomnianIRC;
 import com.domnian.DomnianIRC.IRCBridge;
+import com.domnian.api.Util;
 import org.bukkit.ChatColor;
 import org.schwering.irc.lib.IRCEventListener;
 import org.schwering.irc.lib.IRCModeParser;
@@ -11,26 +12,26 @@ public class IRCChatListener implements IRCEventListener {
 
 	IRCBridge irc = DomnianIRC.getIRCBridge();
 	String channel = irc.channel;
+	String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix");
 
 	@Override
 	public void onError(String msg) {
-		System.out.println("ง4IRC ERROR >> " + msg);
+		System.out.println("IRC ERROR >> " + msg);
 	}
 
 	@Override public void onError(int num, String msg) {
-		System.out.println("ง4IRC ERROR >> " + num + " : " + msg);
+		System.out.println("IRC ERROR >> " + num + " : " + msg);
 	}
 
 	@Override
 	public void onJoin(String chan, IRCUser user) {
-		String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix").replace('&', 'ง');
-		DomnianIRC.getInstance().getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Joined IRC");
+		DomnianIRC.getInstance().getServer().broadcastMessage(Util.color(prefix + "&e" + user.getNick() + " Joined IRC"));
 	}
 
 	@Override
 	public void onPart(String chan, IRCUser user, String msg) {
-		String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix").replace('&', 'ง');
-		DomnianIRC.getInstance().getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Left IRC");
+
+		DomnianIRC.getInstance().getServer().broadcastMessage(Util.color(prefix + "&e" + user.getNick() + " Left IRC"));
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class IRCChatListener implements IRCEventListener {
 	}
 	
 	@Override public void onQuit(IRCUser user, String msg) {
-		String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix").replace('&', 'ง');
+		String prefix = DomnianIRC.getInstance().getConfig().getString("irc.prefix").replace('&', 'ยง');
 		DomnianIRC.getInstance().getServer().broadcastMessage(prefix + ChatColor.YELLOW + user.getNick() + " Joined IRC");
 	}
 
