@@ -1,6 +1,7 @@
 package com.domnian.api;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
 public class Util {
 
     public static String color (String message) {
-        return message.replaceAll("(?i)&([a-f0-9])", "\u00A7$1");
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 
     public static void printException(Exception e) {
